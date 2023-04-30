@@ -18,9 +18,11 @@ public class BaseRepository<T> : IBaseRepository<T>
         _mongoDbCollection = mongoDatabase.GetCollection<T>(databaseSettings.Value.CollectionName);
     }
 
-    public async Task CreateOneAsync(T t, CancellationToken cancellationToken) =>
+    public async Task CreateOneAsync(T t, CancellationToken cancellationToken = default) =>
         await _mongoDbCollection.InsertOneAsync(t, cancellationToken: cancellationToken);
 
+    public async Task CreateManyAsync(List<T> values, CancellationToken cancellationToken = default) =>
+        await _mongoDbCollection.InsertManyAsync(values, cancellationToken: cancellationToken);
 
     public async Task<bool> DeleteByIdAsync(string id, CancellationToken cancellationToken = default)
     {

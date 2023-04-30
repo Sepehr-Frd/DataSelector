@@ -16,6 +16,8 @@ public class BaseBusiness<T>
     public async Task CreateOneAsync(T t, CancellationToken cancellationToken = default) =>
         await _repository.CreateOneAsync(t, cancellationToken);
 
+    public async Task CreateManyAsync(List<T> values, CancellationToken cancellationToken = default) =>
+        await _repository.CreateManyAsync(values, cancellationToken);
     public async Task<T?> GetByIdAsync(string id, CancellationToken cancellationToken = default) =>
         await _repository.GetByIdAsync(id, cancellationToken);
 

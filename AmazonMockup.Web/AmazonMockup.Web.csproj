@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AmazonMockup.ExternalService\AmazonMockup.ExternalService.csproj" />
     <ProjectReference Include="..\AmazonMockup.Model\AmazonMockup.Model.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>

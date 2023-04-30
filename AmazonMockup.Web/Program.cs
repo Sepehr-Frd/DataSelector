@@ -8,7 +8,8 @@ builder.Services
     .InjectDatabaseSettings(builder.Configuration)
     .InjectRepositories()
     .InjectBusinesses()
-    .InjectControllers();
+    .InjectControllers()
+    .InjectServices();
 
 var app = builder.Build();
 

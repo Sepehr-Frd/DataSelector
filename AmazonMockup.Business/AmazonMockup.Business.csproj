@@ -10,9 +10,6 @@
     <None Remove="Businesses\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Businesses\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\AmazonMockup.Model\AmazonMockup.Model.csproj" />
     <ProjectReference Include="..\AmazonMockup.DataAccess\AmazonMockup.DataAccess.csproj" />
   </ItemGroup>

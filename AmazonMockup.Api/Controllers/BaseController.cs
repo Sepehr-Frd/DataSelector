@@ -20,6 +20,10 @@ public class BaseController<T> : ControllerBase
     public async Task CreateOneAsync([FromBody] T t, CancellationToken cancellationToken) =>
         await _business.CreateOneAsync(t, cancellationToken);
 
+    [HttpPost]
+    public async Task CreateManyAsync([FromBody] List<T> values, CancellationToken cancellationToken) =>
+        _business.CreateManyAsync(values, cancellationToken);
+
     [HttpGet]
     public async Task<List<T>> GetAllAsync(CancellationToken cancellationToken) =>
         await _business.GetAllAsync(cancellationToken);

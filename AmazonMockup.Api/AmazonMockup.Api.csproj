@@ -10,10 +10,8 @@
     <None Remove="Controllers\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\AmazonMockup.Business\AmazonMockup.Business.csproj" />
+    <ProjectReference Include="..\AmazonMockup.ExternalService\AmazonMockup.ExternalService.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
