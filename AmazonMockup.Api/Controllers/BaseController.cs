@@ -22,7 +22,7 @@ public class BaseController<T> : ControllerBase
 
     [HttpPost]
     public async Task CreateManyAsync([FromBody] List<T> values, CancellationToken cancellationToken) =>
-        _business.CreateManyAsync(values, cancellationToken);
+        await _business.CreateManyAsync(values, cancellationToken);
 
     [HttpGet]
     public async Task<List<T>> GetAllAsync(CancellationToken cancellationToken) =>
