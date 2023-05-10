@@ -6,7 +6,7 @@ namespace AmazonMockup.ExternalService;
 public class RedditMockupService
 {
     // TODO: Get base address
-    private readonly string _baseAddress = "localhost";
+    private readonly string _baseAddress = "http://reddit-mockup-clusterip-service:6000";
 
     public async Task<List<User>?> GetPeopleAsync(CancellationToken cancellationToken = default)
     {

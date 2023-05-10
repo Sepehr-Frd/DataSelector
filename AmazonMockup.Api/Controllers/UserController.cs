@@ -20,7 +20,7 @@ public class UserController : BaseController<User>
 
     [HttpGet]
     [Route("/[action]")]
-    public async Task InsertPeopleInDatabase(CancellationToken cancellationToken)
+    public async Task<IActionResult> InsertPeopleInDatabase(CancellationToken cancellationToken)
     {
         var people = await _redditMockupService.GetPeopleAsync(cancellationToken);
         
@@ -28,6 +28,8 @@ public class UserController : BaseController<User>
         {
             await _business.CreateManyAsync(people, cancellationToken);
         }
+
+        return Ok();
     }
 
 }
