@@ -1,18 +1,17 @@
 ﻿using AmazonMockup.DataAccess;
 using AmazonMockup.Model.Models;
-using ZstdSharp.Unsafe;
 
 namespace AmazonMockup.Business.Businesses;
 
-public class UserBusiness : BaseBusiness<User>
+public class UserBusiness : BaseBusiness<UserDocument>
 {
-    public UserBusiness(IBaseRepository<User> repository) : base(repository)
+    public UserBusiness(IBaseRepository<UserDocument> repository) : base(repository)
     {
     }
 
-    public new async Task CreateOneAsync(User user, CancellationToken cancellationToken = default)
+    public new async Task CreateOneAsync(UserDocument user, CancellationToken cancellationToken = default)
     {
-        var newUser = new User
+        var newUser = new UserDocument
         {
             Username = user.Username,
             Password = user.Password

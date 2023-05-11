@@ -9,7 +9,7 @@ namespace AmazonMockup.Api.Controllers;
 [ApiController]
 [Route("api/[controller]/[action]")]
 public class BaseController<T> : ControllerBase
-    where T : BaseMongoDbDocument
+    where T : BaseDocument
 {
     private readonly BaseBusiness<T> _business;
 

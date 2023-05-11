@@ -1,6 +1,6 @@
 ﻿namespace AmazonMockup.Model.Models;
 
-public class AmazonMockupDatabaseSettings
+public class MongoDbSettings
 {
     public string ConnectionString { get; set; } = null!;
 

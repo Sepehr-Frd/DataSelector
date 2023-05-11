@@ -1,6 +1,4 @@
-﻿using System.Net.Http.Headers;
-
-namespace AmazonMockup.DataAccess;
+﻿namespace AmazonMockup.DataAccess;
 
 public interface IBaseRepository<T> where T : class
 {

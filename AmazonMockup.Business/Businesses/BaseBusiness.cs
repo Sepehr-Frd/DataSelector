@@ -5,7 +5,7 @@ using AmazonMockup.Model.Models;
 namespace AmazonMockup.Business.Businesses;
 
 public class BaseBusiness<T>
-    where T : BaseMongoDbDocument
+    where T : BaseDocument
 {
     private readonly IBaseRepository<T> _repository;
 

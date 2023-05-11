@@ -1,34 +1,36 @@
-﻿using AmazonMockup.Model.Models;
+﻿using AmazonMockup.Common.Dtos;
+using AmazonMockup.Model.Models;
+using AutoMapper;
+using Newtonsoft.Json;
 using RestSharp;
 
 namespace AmazonMockup.ExternalService;
 
 public class RedditMockupService
 {
-    // TODO: Get base address
-    private readonly string _baseAddress = "http://reddit-mockup-clusterip-service:6000";
+    private readonly string _baseAddress = "https://reddit-mockup-clusterip-service:443/PublicApi";
 
-    public async Task<List<User>?> GetPeopleAsync(CancellationToken cancellationToken = default)
+    private readonly IMapper _mapper;
+
+    public RedditMockupService(IMapper mapper) =>
+        _mapper = mapper;
+
+    public async Task<List<QuestionDocument>?> GetQuestionsAsync(CancellationToken cancellationToken = default)
     {
         var restClient = new RestClient();
 
-        var loginRequest = new RestRequest($"{_baseAddress}/Login");
-
-        var user = new
+        var restRequest = new RestRequest($"{_baseAddress}/Question")
         {
-            Username = "sepehr_frd",
-            Password = "sfr1376",
-            RememberMe = true
+            Timeout = TimeSpan.FromSeconds(5).Milliseconds
         };
 
-        loginRequest.AddJsonBody(user);
+        var restResponse = await restClient.ExecuteGetAsync(restRequest, cancellationToken);
 
-        await restClient.ExecutePostAsync(loginRequest, cancellationToken);
+        var deserializedResponse = await Task.Factory.StartNew(
+            () => JsonConvert.DeserializeObject<RedditMockupResponseDto<List<QuestionResponseDto>>>(restResponse.Content ?? ""));
 
-        var getUsersRequest = new RestRequest($"{_baseAddress}/User");
+        var questions = _mapper.Map<List<QuestionDocument>>(deserializedResponse?.Data);
 
-        var people = await restClient.ExecuteGetAsync<List<User>>(getUsersRequest, cancellationToken);
-
-        return people.Data;
+        return questions;
     }
 }

@@ -3,10 +3,9 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace AmazonMockup.Model.Models;
 
-public class BaseMongoDbDocument
+public class BaseDocument
 {
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
     public string? Id { get; set; }
 }
-

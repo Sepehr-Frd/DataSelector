@@ -1,12 +1,11 @@
-﻿using Amazon.Runtime.Internal.Util;
-using AmazonMockup.Model.Models;
+﻿using AmazonMockup.Model.Models;
 using Microsoft.Extensions.Options;
 
 namespace AmazonMockup.DataAccess.Repositories;
 
-public class UserRepository : BaseRepository<User>
+public class UserRepository : BaseRepository<UserDocument>
 {
-    public UserRepository(IOptions<AmazonMockupDatabaseSettings> databaseSettings) : base(databaseSettings)
+    public UserRepository(IOptions<MongoDbSettings> databaseSettings) : base(databaseSettings)
     {
     }
 }

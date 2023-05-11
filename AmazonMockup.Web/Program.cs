@@ -9,7 +9,8 @@ builder.Services
     .InjectRepositories()
     .InjectBusinesses()
     .InjectControllers()
-    .InjectServices();
+    .InjectServices()
+    .InjectAutoMapper();
 
 var app = builder.Build();
 

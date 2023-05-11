@@ -10,4 +10,15 @@
     <PackageReference Include="AutoMapper" Version="12.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Dtos\" />
+    <None Remove="MappingProfiles\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Dtos\" />
+    <Folder Include="MappingProfiles\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AmazonMockup.Model\AmazonMockup.Model.csproj" />
+  </ItemGroup>
 </Project>

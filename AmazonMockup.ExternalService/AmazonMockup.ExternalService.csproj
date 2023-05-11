@@ -8,10 +8,12 @@
 
   <ItemGroup>
     <PackageReference Include="RestSharp" Version="110.2.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\AmazonMockup.Model\AmazonMockup.Model.csproj" />
+    <ProjectReference Include="..\AmazonMockup.Common\AmazonMockup.Common.csproj" />
   </ItemGroup>
 
 </Project>

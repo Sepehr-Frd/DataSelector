@@ -5,11 +5,11 @@ using MongoDB.Driver;
 namespace AmazonMockup.DataAccess.Repositories;
 
 public class BaseRepository<T> : IBaseRepository<T>
-    where T : BaseMongoDbDocument
+    where T : BaseDocument
 {
     private readonly IMongoCollection<T> _mongoDbCollection;
 
-    public BaseRepository(IOptions<AmazonMockupDatabaseSettings> databaseSettings)
+    public BaseRepository(IOptions<MongoDbSettings> databaseSettings)
     {
         var mongoClient = new MongoClient(databaseSettings.Value.ConnectionString);
 
