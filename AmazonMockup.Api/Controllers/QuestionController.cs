@@ -23,9 +23,9 @@ public class QuestionController : BaseController<QuestionDocument>
     {
         var questions = await _redditMockupService.GetQuestionsAsync(cancellationToken);
 
-        if (questions is null)
+        if (questions is null || questions.Count == 0)
         {
-            return Ok("No question found on the destination.");
+            return NoContent();
         }
 
         await _questionBusiness.CreateManyAsync(questions, cancellationToken);
