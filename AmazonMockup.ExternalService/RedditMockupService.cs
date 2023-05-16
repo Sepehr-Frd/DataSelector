@@ -8,7 +8,7 @@ namespace AmazonMockup.ExternalService;
 
 public class RedditMockupService
 {
-    private readonly string _baseAddress = "https://reddit-mockup-clusterip-service:443/PublicApi";
+    private readonly string _baseAddress = "http://reddit-mockup-clusterip-service:80/PublicApi";
 
     private readonly IMapper _mapper;
 
