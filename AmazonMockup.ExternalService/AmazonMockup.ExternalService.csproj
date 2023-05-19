@@ -9,11 +9,22 @@
   <ItemGroup>
     <PackageReference Include="RestSharp" Version="110.2.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="RabbitMQ.Client" Version="6.5.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\AmazonMockup.Model\AmazonMockup.Model.csproj" />
     <ProjectReference Include="..\AmazonMockup.Common\AmazonMockup.Common.csproj" />
+    <ProjectReference Include="..\AmazonMockup.DataAccess\AmazonMockup.DataAccess.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="RabbitMQ\" />
+    <None Remove="RabbitMQ\EventProcessing\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="RabbitMQ\" />
+    <Folder Include="RabbitMQ\EventProcessing\" />
+  </ItemGroup>
 </Project>
