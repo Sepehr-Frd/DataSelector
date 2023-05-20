@@ -8,9 +8,9 @@ WORKDIR /source
 
 COPY . .
 
-RUN dotnet restore ./AmazonMockup.Web/AmazonMockup.Web.csproj --disable-parallel
+RUN dotnet restore ./DataSelector.Web/DataSelector.Web.csproj --disable-parallel
 
-RUN dotnet publish ./AmazonMockup.Web/AmazonMockup.Web.csproj -o /publish --no-restore
+RUN dotnet publish ./DataSelector.Web/DataSelector.Web.csproj -o /publish --no-restore
 
 # Serve
 
@@ -20,4 +20,4 @@ WORKDIR /app
 
 COPY --from=build /publish ./
 
-ENTRYPOINT ["dotnet", "AmazonMockup.Web.dll"]
+ENTRYPOINT ["dotnet", "DataSelector.Web.dll"]
