@@ -20,15 +20,14 @@ public class EventProcessor : IEventProcessor
         _mapper = mapper;
     }
 
-    public void ProcessEvent(string message)
+    public async Task ProcessEventAsync(string message, CancellationToken cancellationToken = default)
     {
         var eventType = DetermineEventType(message);
 
         if (eventType is EventType.QuestionPublished)
         {
-
+            await AddQuestionAsync(message, cancellationToken);
         }
-
 
     }
 
@@ -54,7 +53,7 @@ public class EventProcessor : IEventProcessor
 
         try
         {
-            var questionDocument = _mapper.Map<QuestionDocument>(questionPublishedDto!.QuestionResponseDto);
+            var questionDocument = _mapper.Map<QuestionDocument>(questionPublishedDto);
             // TODO: Check if the question already exists
             await repository.CreateOneAsync(questionDocument, cancellationToken);
 

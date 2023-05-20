@@ -10,7 +10,9 @@ builder.Services
     .InjectBusinesses()
     .InjectControllers()
     .InjectServices()
-    .InjectAutoMapper();
+    .InjectAutoMapper()
+    .InjectEventProcessor()
+    .InjectMessageBusSubscriber();
 
 var app = builder.Build();
 

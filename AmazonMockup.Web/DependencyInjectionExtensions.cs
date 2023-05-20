@@ -3,6 +3,8 @@ using AmazonMockup.Common.MappingProfiles;
 using AmazonMockup.DataAccess;
 using AmazonMockup.DataAccess.Repositories;
 using AmazonMockup.ExternalService;
+using AmazonMockup.ExternalService.RabbitMQ;
+using AmazonMockup.ExternalService.RabbitMQ.EventProcessing;
 using AmazonMockup.Model.Models;
 
 namespace AmazonMockup.Web;
@@ -27,5 +29,11 @@ public static class DependencyInjectionExtensions
 
     internal static IServiceCollection InjectAutoMapper(this IServiceCollection services) =>
         services.AddAutoMapper(typeof(QuestionProfile).Assembly);
+
+    internal static IServiceCollection InjectEventProcessor(this IServiceCollection services) =>
+        services.AddSingleton<IEventProcessor, EventProcessor>();
+
+    internal static IServiceCollection InjectMessageBusSubscriber(this IServiceCollection services) =>
+        services.AddHostedService<MessageBusSubscriber>();
 }
 

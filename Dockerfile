@@ -2,7 +2,7 @@
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0.203 AS build
 
-ENV ASPNETCORE_ENVIRONMENT=Development
+ENV ASPNETCORE_ENVIRONMENT=Production
 
 WORKDIR /source
 

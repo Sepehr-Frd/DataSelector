@@ -6,9 +6,15 @@ namespace AmazonMockup.Common.MappingProfiles;
 
 public class QuestionProfile : Profile
 {
-    public QuestionProfile() =>
+    public QuestionProfile()
+    {
         CreateMap<QuestionDocument, QuestionResponseDto>()
             .ReverseMap();
+
+        CreateMap<QuestionPublishedDto, QuestionDocument>();
+            
+    }
+
 
 }
 
