@@ -87,10 +87,10 @@ public class MessageBusSubscriber : BackgroundService
 
     public override void Dispose()
     {
-        if (_channel.IsOpen)
+        if (_channel!.IsOpen)
         {
             _channel.Close();
-            _connection.Close();
+            _connection!.Close();
         }
 
         base.Dispose();

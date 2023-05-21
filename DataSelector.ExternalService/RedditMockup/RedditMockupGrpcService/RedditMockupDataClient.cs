@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Net;
+using AutoMapper;
 using DataSelector.Common.Dtos;
 using Grpc.Net.Client;
 using Microsoft.Extensions.Configuration;
@@ -18,9 +19,42 @@ public class RedditMockupDataClient : IRedditMockupDataClient
         _mapper = mapper;
     }
 
-    public IEnumerable<QuestionResponseDto> ReturnAllQuestions()
+    public IEnumerable<QuestionResponseDto>? ReturnAllQuestions()
     {
-        var channel = GrpcChannel.ForAddress(_configuration.GetValue<string>("RedditMockupGrpc")!);
+        var grpcAddress = _configuration.GetValue<string>("RedditMockupGrpc");
+
+        if (grpcAddress is null)
+        {
+            // TODO: Use NLog
+            Console.WriteLine("RedditMockupGrpc address in appsettings is null or invalid!");
+
+            return null;
+        }
+
+        var proxy = new WebProxy
+        {
+            UseDefaultCredentials = true,
+            BypassProxyOnLocal = true,
+            Credentials = CredentialCache.DefaultNetworkCredentials
+        };
+
+        proxy.BypassArrayList.Add("https://localhost:6000");
+
+        var httpClientHandler = new HttpClientHandler
+        {
+            Proxy = proxy,
+            DefaultProxyCredentials = CredentialCache.DefaultNetworkCredentials,
+            UseDefaultCredentials = true
+        };
+        var httpClient = new HttpClient(httpClientHandler)
+        {
+            DefaultRequestVersion = HttpVersion.Version20
+        };
+
+        var channel = GrpcChannel.ForAddress(grpcAddress, new GrpcChannelOptions
+        {
+            HttpClient = httpClient
+        });
         
         var client = new RedditMockupGrpc.RedditMockupGrpcClient(channel);
 
@@ -29,12 +63,14 @@ public class RedditMockupDataClient : IRedditMockupDataClient
         try
         {
             var reply = client.GetAllQuestions(request);
-            return _mapper.Map<IEnumerable<QuestionResponseDto>>(reply);
+            return _mapper.Map<IEnumerable<QuestionResponseDto>>(reply.Question);
         }
         catch (Exception exception)
         {
-            // TODO: Use Nlog
+            // TODO: Use NLog
             Console.WriteLine($"Could not call GRPC Server {exception.Message}");
+
+            return null;
         }
     }
 }

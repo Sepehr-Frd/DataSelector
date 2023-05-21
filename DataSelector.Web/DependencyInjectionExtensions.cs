@@ -5,6 +5,7 @@ using DataSelector.DataAccess.Repositories;
 using DataSelector.ExternalService.RabbitMQ;
 using DataSelector.ExternalService.RabbitMQ.EventProcessing;
 using DataSelector.ExternalService.RedditMockup;
+using DataSelector.ExternalService.RedditMockup.RedditMockupGrpcService;
 using DataSelector.Model.Models;
 
 namespace DataSelector.Web;
@@ -28,8 +29,10 @@ public static class DependencyInjectionExtensions
     internal static IServiceCollection InjectAutoMapper(this IServiceCollection services) =>
         services.AddAutoMapper(typeof(QuestionProfile).Assembly);
 
-    internal static IServiceCollection InjectEventProcessor(this IServiceCollection services) =>
-        services.AddSingleton<IEventProcessor, EventProcessor>();
+    internal static IServiceCollection InjectExternalServices(this IServiceCollection services) =>
+        services
+            .AddSingleton<IEventProcessor, EventProcessor>()
+            .AddScoped<IRedditMockupDataClient, RedditMockupDataClient>();
 
     internal static IServiceCollection InjectMessageBusSubscriber(this IServiceCollection services) =>
         services.AddHostedService<MessageBusSubscriber>();

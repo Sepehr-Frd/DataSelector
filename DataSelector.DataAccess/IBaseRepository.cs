@@ -2,9 +2,9 @@
 
 public interface IBaseRepository<T> where T : class
 {
-    Task CreateOneAsync(T t, CancellationToken cancellationToken);
+    Task CreateOneAsync(T t, CancellationToken cancellationToken = default);
 
-    Task CreateManyAsync(List<T> values, CancellationToken cancellationToken);
+    Task CreateManyAsync(IEnumerable<T> values, CancellationToken cancellationToken = default);
 
     Task<List<T>> GetAllAsync(CancellationToken cancellationToken = default);
 

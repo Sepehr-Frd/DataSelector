@@ -8,7 +8,9 @@
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(RunConfiguration)' == 'DataSelector.Web.Development' " />
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'DataSelector.Web(Development)' " />
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'DataSelector.Web(Production)' " />
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'DataSelector.Web(Testing)' " />
   <ItemGroup>
     <PackageReference Include="Google.Protobuf" Version="3.23.1" />
     <PackageReference Include="Grpc.Net.Client" Version="2.53.0" />
