@@ -1,5 +1,5 @@
 ﻿using DataSelector.Business.Businesses;
-using DataSelector.ExternalService;
+using DataSelector.ExternalService.RedditMockup;
 using DataSelector.Model.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,9 +9,9 @@ public class QuestionController : BaseController<QuestionDocument>
 {
     private readonly QuestionBusiness _questionBusiness;
 
-    private readonly RedditMockupService _redditMockupService;
+    private readonly RedditMockupRestService _redditMockupService;
 
-    public QuestionController(QuestionBusiness questionBusiness, RedditMockupService redditMockupService) : base(questionBusiness)
+    public QuestionController(QuestionBusiness questionBusiness, RedditMockupRestService redditMockupService) : base(questionBusiness)
     {
         _questionBusiness = questionBusiness;
 

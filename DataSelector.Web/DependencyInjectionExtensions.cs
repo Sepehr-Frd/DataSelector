@@ -1,10 +1,10 @@
 ﻿using DataSelector.Business.Businesses;
-using DataSelector.Common.MappingProfiles;
+using DataSelector.Common.Profiles;
 using DataSelector.DataAccess;
 using DataSelector.DataAccess.Repositories;
-using DataSelector.ExternalService;
 using DataSelector.ExternalService.RabbitMQ;
 using DataSelector.ExternalService.RabbitMQ.EventProcessing;
+using DataSelector.ExternalService.RedditMockup;
 using DataSelector.Model.Models;
 
 namespace DataSelector.Web;
@@ -17,15 +17,13 @@ public static class DependencyInjectionExtensions
         services.Configure<MongoDbSettings>(configuration.GetSection("MongoDb"));
 
     public static IServiceCollection InjectRepositories(this IServiceCollection services) =>
-        services.AddScoped<IBaseRepository<UserDocument>, UserRepository>()
-                .AddScoped<IBaseRepository<QuestionDocument>, QuestionRepository>();
+        services.AddScoped<IBaseRepository<QuestionDocument>, QuestionRepository>();
 
     public static IServiceCollection InjectBusinesses(this IServiceCollection services) =>
-        services.AddScoped<UserBusiness>()
-                .AddScoped<QuestionBusiness>();
+        services.AddScoped<QuestionBusiness>();
 
     public static IServiceCollection InjectServices(this IServiceCollection services) =>
-        services.AddScoped<RedditMockupService>();
+        services.AddScoped<RedditMockupRestService>();
 
     internal static IServiceCollection InjectAutoMapper(this IServiceCollection services) =>
         services.AddAutoMapper(typeof(QuestionProfile).Assembly);
