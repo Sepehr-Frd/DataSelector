@@ -33,8 +33,7 @@
       "launchUrl": "swagger",
       "applicationUrl": "https://localhost:7001;http://localhost:7000",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Testing",
-        "ASPNETCORE_PROXYBYPASSONLOCAL": "1"
+        "ASPNETCORE_ENVIRONMENT": "Testing"
       }
     }
   }

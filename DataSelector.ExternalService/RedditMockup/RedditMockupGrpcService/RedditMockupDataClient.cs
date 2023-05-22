@@ -31,31 +31,48 @@ public class RedditMockupDataClient : IRedditMockupDataClient
             return null;
         }
 
-        var proxy = new WebProxy
-        {
-            UseDefaultCredentials = true,
-            BypassProxyOnLocal = true,
-            Credentials = CredentialCache.DefaultNetworkCredentials
-        };
 
-        proxy.BypassArrayList.Add("https://localhost:6000");
-
-        var httpClientHandler = new HttpClientHandler
+        var handler = new HttpClientHandler
         {
-            Proxy = proxy,
+            ServerCertificateCustomValidationCallback =
+            HttpClientHandler.DangerousAcceptAnyServerCertificateValidator,
             DefaultProxyCredentials = CredentialCache.DefaultNetworkCredentials,
             UseDefaultCredentials = true
-        };
-        var httpClient = new HttpClient(httpClientHandler)
-        {
-            DefaultRequestVersion = HttpVersion.Version20
+
         };
 
-        var channel = GrpcChannel.ForAddress(grpcAddress, new GrpcChannelOptions
-        {
-            HttpClient = httpClient
-        });
-        
+        var channel = GrpcChannel.ForAddress("http://localhost:6000",
+            new GrpcChannelOptions { HttpHandler = handler });
+
+        //var proxy = new WebProxy
+        //{
+        //    UseDefaultCredentials = true,
+        //    BypassProxyOnLocal = true,
+        //    Credentials = CredentialCache.DefaultNetworkCredentials
+        //};
+
+        //proxy.BypassArrayList.Add("https://localhost:6000");
+
+        //var httpClientHandler = new HttpClientHandler
+        //{
+        //    Proxy = proxy,
+        //    DefaultProxyCredentials = CredentialCache.DefaultNetworkCredentials,
+        //    UseDefaultCredentials = true
+        //};
+        //var httpClient = new HttpClient
+        //{
+        //    DefaultRequestVersion = HttpVersion.Version20,
+        //    DefaultVersionPolicy = HttpVersionPolicy.RequestVersionExact
+        //};
+
+        //var channel = GrpcChannel.ForAddress(grpcAddress, new GrpcChannelOptions
+        //{
+        //    HttpClient = httpClient
+        //});
+
+        //var channel = GrpcChannel.ForAddress(grpcAddress);
+
+
         var client = new RedditMockupGrpc.RedditMockupGrpcClient(channel);
 
         var request = new GetAllRequest();
