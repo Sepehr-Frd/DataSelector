@@ -1,5 +1,4 @@
-﻿using System.Net;
-using AutoMapper;
+﻿using AutoMapper;
 using DataSelector.Common.Dtos;
 using Grpc.Net.Client;
 using Microsoft.Extensions.Configuration;
@@ -11,7 +10,7 @@ public class RedditMockupDataClient : IRedditMockupDataClient
 {
     private readonly IConfiguration _configuration;
 
-    private readonly IMapper _mapper; 
+    private readonly IMapper _mapper;
 
     public RedditMockupDataClient(IConfiguration configuration, IMapper mapper)
     {
@@ -31,47 +30,7 @@ public class RedditMockupDataClient : IRedditMockupDataClient
             return null;
         }
 
-
-        var handler = new HttpClientHandler
-        {
-            ServerCertificateCustomValidationCallback =
-            HttpClientHandler.DangerousAcceptAnyServerCertificateValidator,
-            DefaultProxyCredentials = CredentialCache.DefaultNetworkCredentials,
-            UseDefaultCredentials = true
-
-        };
-
-        var channel = GrpcChannel.ForAddress("http://localhost:6000",
-            new GrpcChannelOptions { HttpHandler = handler });
-
-        //var proxy = new WebProxy
-        //{
-        //    UseDefaultCredentials = true,
-        //    BypassProxyOnLocal = true,
-        //    Credentials = CredentialCache.DefaultNetworkCredentials
-        //};
-
-        //proxy.BypassArrayList.Add("https://localhost:6000");
-
-        //var httpClientHandler = new HttpClientHandler
-        //{
-        //    Proxy = proxy,
-        //    DefaultProxyCredentials = CredentialCache.DefaultNetworkCredentials,
-        //    UseDefaultCredentials = true
-        //};
-        //var httpClient = new HttpClient
-        //{
-        //    DefaultRequestVersion = HttpVersion.Version20,
-        //    DefaultVersionPolicy = HttpVersionPolicy.RequestVersionExact
-        //};
-
-        //var channel = GrpcChannel.ForAddress(grpcAddress, new GrpcChannelOptions
-        //{
-        //    HttpClient = httpClient
-        //});
-
-        //var channel = GrpcChannel.ForAddress(grpcAddress);
-
+        var channel = GrpcChannel.ForAddress(grpcAddress);
 
         var client = new RedditMockupGrpc.RedditMockupGrpcClient(channel);
 
