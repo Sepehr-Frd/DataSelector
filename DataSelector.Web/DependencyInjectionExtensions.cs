@@ -7,6 +7,7 @@ using DataSelector.ExternalService.RabbitMQ.EventProcessing;
 using DataSelector.ExternalService.RedditMockup;
 using DataSelector.ExternalService.RedditMockup.RedditMockupGrpcService;
 using DataSelector.Model.Models;
+using Nest;
 
 namespace DataSelector.Web;
 
@@ -36,5 +37,21 @@ public static class DependencyInjectionExtensions
 
     internal static IServiceCollection InjectMessageBusSubscriber(this IServiceCollection services) =>
         services.AddHostedService<MessageBusSubscriber>();
+
+    internal static IServiceCollection InjectElasticSearch(this IServiceCollection services, IConfiguration configuration)
+    {
+        var connectionString = configuration.GetSection("ElasticSearch").GetValue<string>("ConnectionString");
+        var defaultIndex = configuration.GetSection("ElasticSearch").GetValue<string>("DefaultIndex");
+
+        var settings = new ConnectionSettings(new Uri(connectionString!));
+
+        settings = settings.DefaultIndex(defaultIndex);
+
+        var elasticClient = new ElasticClient(settings);
+
+        services.AddSingleton<IElasticClient>(elasticClient);
+
+        return services;
+    }
 }
 
