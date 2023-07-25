@@ -2,6 +2,7 @@
 using DataSelector.Common.Profiles;
 using DataSelector.DataAccess;
 using DataSelector.DataAccess.Repositories;
+using DataSelector.ExternalService.ElasticSearch;
 using DataSelector.ExternalService.RabbitMQ;
 using DataSelector.ExternalService.RabbitMQ.EventProcessing;
 using DataSelector.ExternalService.RedditMockup;
@@ -41,6 +42,7 @@ public static class DependencyInjectionExtensions
     internal static IServiceCollection InjectElasticSearch(this IServiceCollection services, IConfiguration configuration)
     {
         var connectionString = configuration.GetSection("ElasticSearch").GetValue<string>("ConnectionString");
+        
         var defaultIndex = configuration.GetSection("ElasticSearch").GetValue<string>("DefaultIndex");
 
         var settings = new ConnectionSettings(new Uri(connectionString!));
@@ -51,6 +53,8 @@ public static class DependencyInjectionExtensions
 
         services.AddSingleton<IElasticClient>(elasticClient);
 
+        services.AddHostedService<ElasticSearchHostedService>();
+        
         return services;
     }
 }

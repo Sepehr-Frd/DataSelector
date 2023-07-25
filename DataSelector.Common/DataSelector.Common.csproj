@@ -15,7 +15,6 @@
     <None Remove="MappingProfiles\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Dtos\" />
     <Folder Include="Profiles\" />
   </ItemGroup>
   <ItemGroup>
