@@ -13,7 +13,8 @@ builder.Services
     .InjectServices()
     .InjectAutoMapper()
     .InjectExternalServices()
-    .InjectMessageBusSubscriber();
+    .InjectMessageBusSubscriber()
+    .InjectElasticSearch(builder.Configuration);
 
 var app = builder.Build();
 

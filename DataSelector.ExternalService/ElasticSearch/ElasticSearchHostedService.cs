@@ -38,7 +38,7 @@ public class ElasticSearchHostedService : IHostedService
             await _elasticClient.Indices.DeleteAsync(_indexName, ct: cancellationToken);
         }
 
-        var createQuestionsIndex = await _elasticClient.Indices.CreateAsync(_indexName, ct: cancellationToken, selector: c => c
+        await _elasticClient.Indices.CreateAsync(_indexName, ct: cancellationToken, selector: c => c
                 .Settings(s => s
                         .Analysis(a => a
                                 .TokenFilters(tf => tf
@@ -99,7 +99,7 @@ public class ElasticSearchHostedService : IHostedService
     {
         var questions = await _mongoDbCollection.Find(_ => true).ToListAsync(cancellationToken);
 
-        var indexManyResult = await _elasticClient.IndexManyAsync(questions, _indexName,cancellationToken);
+        var indexManyResult = await _elasticClient.IndexManyAsync(questions, _indexName, cancellationToken);
 
         return !indexManyResult.Errors;
     }

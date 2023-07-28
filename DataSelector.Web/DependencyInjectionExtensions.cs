@@ -42,20 +42,23 @@ public static class DependencyInjectionExtensions
     internal static IServiceCollection InjectElasticSearch(this IServiceCollection services, IConfiguration configuration)
     {
         var connectionString = configuration.GetSection("ElasticSearch").GetValue<string>("ConnectionString");
-        
+
         var defaultIndex = configuration.GetSection("ElasticSearch").GetValue<string>("DefaultIndex");
 
-        var settings = new ConnectionSettings(new Uri(connectionString!));
-
-        settings = settings.DefaultIndex(defaultIndex);
+        var settings = new ConnectionSettings(new Uri(connectionString!))
+            .CertificateFingerprint("D3:08:86:DB:2E:46:C4:0B:40:E9:29:17:C7:7A:50:A1:9C:17:B7:FE:7C:45:93:B9:09:9B:40:F1:C4:79:BF:24")
+            .DefaultIndex(defaultIndex)
+            .BasicAuthentication("elastic", "pKSNgA_5gAxzrW4CHu1D")
+            .EnableApiVersioningHeader();
 
         var elasticClient = new ElasticClient(settings);
 
         services.AddSingleton<IElasticClient>(elasticClient);
 
         services.AddHostedService<ElasticSearchHostedService>();
-        
+
+        services.AddScoped<ElasticSearchService>();
+
         return services;
     }
 }
-

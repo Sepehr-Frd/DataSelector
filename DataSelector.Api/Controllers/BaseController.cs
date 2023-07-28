@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace DataSelector.Api.Controllers;
 
 [ApiController]
-[Route("api/[controller]/[action]")]
+[Route("api")]
 public class BaseController<T> : ControllerBase
     where T : BaseDocument
 {
@@ -19,6 +19,7 @@ public class BaseController<T> : ControllerBase
         await _business.CreateOneAsync(t, cancellationToken);
 
     [HttpPost]
+    [Route("bulk")]
     public async Task CreateManyAsync([FromBody] List<T> values, CancellationToken cancellationToken) =>
         await _business.CreateManyAsync(values, cancellationToken);
 
@@ -27,6 +28,7 @@ public class BaseController<T> : ControllerBase
         await _business.GetAllAsync(cancellationToken);
 
     [HttpGet]
+    [Route("id")]
     public async Task<T?> GetByIdAsync([FromQuery] string id, CancellationToken cancellationToken) =>
         await _business.GetByIdAsync(id, cancellationToken);
 
@@ -35,6 +37,7 @@ public class BaseController<T> : ControllerBase
         await _business.UpdateOneAsync(t, cancellationToken);
 
     [HttpDelete]
+    [Route("id")]
     public async Task<bool> DeleteByIdAsync([FromQuery] string id, CancellationToken cancellationToken) =>
         await _business.DeleteByIdAsync(id, cancellationToken);
 }
