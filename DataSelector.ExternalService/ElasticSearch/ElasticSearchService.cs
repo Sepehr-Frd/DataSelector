@@ -18,15 +18,18 @@ public class ElasticSearchService
 
     public async Task<SearchResponseDto<QuestionResponseDto>> QueryQuestions(string query, CancellationToken cancellationToken)
     {
+        Console.WriteLine(_elasticClient.Indices);
+
         var response = await _elasticClient.SearchAsync<QuestionDocument>(s =>
-                s.Query(sq =>
+                s.Index(_elasticClient.ConnectionSettings.DefaultIndex)
+                .Query(sq =>
                         sq.MultiMatch(mm => mm
                                 .Query(query)
                                 .Fuzziness(Fuzziness.Auto)
                             )
                     ),
             cancellationToken);
-        
+
         var searchDto = new SearchResponseDto<QuestionResponseDto>
         {
             Term = query
