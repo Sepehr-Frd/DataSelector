@@ -1,5 +1,4 @@
-﻿using System.Net.Http.Headers;
-using DataSelector.DataAccess;
+﻿using DataSelector.DataAccess;
 using DataSelector.Model.Models;
 
 namespace DataSelector.Business.Businesses;
@@ -11,7 +10,7 @@ public class BaseBusiness<T>
 
     public BaseBusiness(IBaseRepository<T> repository) =>
         _repository = repository;
-    
+
 
     public async Task CreateOneAsync(T t, CancellationToken cancellationToken = default) =>
         await _repository.CreateOneAsync(t, cancellationToken);

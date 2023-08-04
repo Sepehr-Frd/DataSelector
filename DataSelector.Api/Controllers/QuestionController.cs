@@ -51,7 +51,6 @@ public class QuestionController : BaseController<QuestionDocument>
         }
 
         return await _elasticSearchService.QueryQuestions(query, cancellationToken);
-
     }
 
 }

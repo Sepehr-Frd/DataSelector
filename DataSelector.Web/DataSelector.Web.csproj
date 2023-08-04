@@ -12,12 +12,6 @@
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'DataSelector.Web(Production)' " />
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'DataSelector.Web(Testing)' " />
   <ItemGroup>
-    <PackageReference Include="Google.Protobuf" Version="3.23.1" />
-    <PackageReference Include="Grpc.Net.Client" Version="2.53.0" />
-    <PackageReference Include="Grpc.Tools" Version="2.54.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.5" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.18.1" />
     <PackageReference Include="NEST" Version="7.17.5" />

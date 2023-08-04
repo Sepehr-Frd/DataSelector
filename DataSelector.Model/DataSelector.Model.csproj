@@ -10,11 +10,7 @@
         <None Remove="Models\" />
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Grpc.AspNetCore" Version="2.53.0" />
         <PackageReference Include="MongoDB.Driver" Version="2.19.1" />
         <PackageReference Include="NEST" Version="7.17.5" />
-    </ItemGroup>
-    <ItemGroup>
-        <Protobuf Include="Protos/redditmockup.proto" GrpcServices="Client" />
     </ItemGroup>
 </Project>

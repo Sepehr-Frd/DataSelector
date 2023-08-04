@@ -1,6 +1,6 @@
-﻿using DataSelector.Common.Dtos;
+﻿using AutoMapper;
+using DataSelector.Common.Dtos;
 using DataSelector.Model.Models;
-using AutoMapper;
 using Newtonsoft.Json;
 using RestSharp;
 
@@ -8,7 +8,7 @@ namespace DataSelector.ExternalService.RedditMockup;
 
 public class RedditMockupRestService
 {
-    private readonly string _baseAddress = "http://reddit-mockup-clusterip-service:80/PublicApi";
+    private const string BaseAddress = "http://localhost:6000/public/questions";
 
     private readonly IMapper _mapper;
 
@@ -19,7 +19,7 @@ public class RedditMockupRestService
     {
         var restClient = new RestClient();
 
-        var restRequest = new RestRequest($"{_baseAddress}/Question")
+        var restRequest = new RestRequest($"{BaseAddress}/Question")
         {
             Timeout = TimeSpan.FromSeconds(5).Milliseconds
         };
