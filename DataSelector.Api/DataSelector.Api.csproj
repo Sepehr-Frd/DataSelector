@@ -9,12 +9,10 @@
   <ItemGroup>
     <None Remove="Controllers\" />
   </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.1.38" />
-  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataSelector.Business\DataSelector.Business.csproj" />
-    <ProjectReference Include="..\DataSelector.ExternalService\DataSelector.ExternalService.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.1.38" />
   </ItemGroup>
 </Project>

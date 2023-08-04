@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.1.38" />
   </ItemGroup>
 
   <ItemGroup>
@@ -15,7 +16,6 @@
     <None Remove="MappingProfiles\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Dtos\" />
     <Folder Include="Profiles\" />
   </ItemGroup>
   <ItemGroup>

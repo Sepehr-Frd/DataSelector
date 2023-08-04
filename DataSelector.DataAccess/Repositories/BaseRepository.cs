@@ -28,12 +28,8 @@ public class BaseRepository<T> : IBaseRepository<T>
     {
         var deleteResult = await _mongoDbCollection.DeleteOneAsync(x => x.Id == id, cancellationToken);
 
-        if (deleteResult.DeletedCount == 1)
-        {
-            return true;
-        }
+        return deleteResult.DeletedCount == 1;
 
-        return false;
     }
 
     public async Task<List<T>> GetAllAsync(CancellationToken cancellationToken = default) =>
@@ -54,11 +50,7 @@ public class BaseRepository<T> : IBaseRepository<T>
 
         var resultCursor = await _mongoDbCollection.ReplaceOneAsync(filterDefinition, t, cancellationToken: cancellationToken);
 
-        if (resultCursor.ModifiedCount == 1)
-        {
-            return true;
-        }
+        return resultCursor.ModifiedCount == 1;
 
-        return false;
     }
 }
