@@ -3,7 +3,6 @@ using DataSelector.Common.Profiles;
 using DataSelector.DataAccess;
 using DataSelector.DataAccess.Repositories;
 using DataSelector.ExternalService.ElasticSearch;
-using DataSelector.ExternalService.RedditMockup;
 using DataSelector.Model.Models;
 using Nest;
 
@@ -21,9 +20,6 @@ public static class DependencyInjectionExtensions
 
     public static IServiceCollection InjectBusinesses(this IServiceCollection services) =>
         services.AddScoped<QuestionBusiness>();
-
-    public static IServiceCollection InjectExternalServices(this IServiceCollection services) =>
-        services.AddScoped<RedditMockupRestService>();
 
     internal static IServiceCollection InjectAutoMapper(this IServiceCollection services) =>
         services.AddAutoMapper(typeof(QuestionProfile).Assembly);

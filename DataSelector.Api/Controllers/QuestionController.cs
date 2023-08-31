@@ -1,7 +1,6 @@
 ﻿using DataSelector.Business.Businesses;
 using DataSelector.Common.Dtos;
 using DataSelector.ExternalService.ElasticSearch;
-using DataSelector.ExternalService.RedditMockup;
 using DataSelector.Model.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,33 +11,12 @@ public class QuestionController : BaseController<QuestionDocument>
 {
     private readonly QuestionBusiness _questionBusiness;
 
-    private readonly RedditMockupRestService _redditMockupService;
-
     private readonly ElasticSearchService _elasticSearchService;
 
-    public QuestionController(QuestionBusiness questionBusiness, RedditMockupRestService redditMockupService, ElasticSearchService elasticSearchService) : base(questionBusiness)
+    public QuestionController(QuestionBusiness questionBusiness, ElasticSearchService elasticSearchService) : base(questionBusiness)
     {
         _questionBusiness = questionBusiness;
-
-        _redditMockupService = redditMockupService;
-
         _elasticSearchService = elasticSearchService;
-    }
-
-    [HttpGet]
-    [Route("import-from-external-resource")]
-    public async Task<IActionResult> ImportQuestionsAsync(CancellationToken cancellationToken)
-    {
-        var questions = await _redditMockupService.GetQuestionsAsync(cancellationToken);
-
-        if (questions is null || questions.Count == 0)
-        {
-            return NoContent();
-        }
-
-        await _questionBusiness.CreateManyAsync(questions, cancellationToken);
-
-        return Ok();
     }
 
     [HttpGet]

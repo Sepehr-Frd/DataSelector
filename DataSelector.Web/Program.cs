@@ -9,7 +9,6 @@ builder.Services
     .InjectRepositories()
     .InjectBusinesses()
     .InjectControllers()
-    .InjectExternalServices()
     .InjectAutoMapper()
     .InjectElasticSearch(builder.Configuration);
 
